@@ -26,7 +26,8 @@ class CategoriesScreen extends StatelessWidget {
 
   List<Widget> _getCategoryWidgets() {
     return categories
-        .map((category) => CategoryItem(category.title, category.color))
+        .map((category) =>
+            CategoryItem(category.id, category.title, category.color))
         .toList();
   }
 }

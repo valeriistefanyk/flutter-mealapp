@@ -10,12 +10,18 @@ class CategoryModel {
 
   static List<CategoryModel> fetchAll() {
     return const [
-      CategoryModel(id: '1', title: 'Category 1', color: Colors.purple),
-      CategoryModel(id: '2', title: 'Category 2', color: Colors.red),
-      CategoryModel(id: '3', title: 'Category 3', color: Colors.yellow),
-      CategoryModel(id: '4', title: 'Category 4'),
-      CategoryModel(id: '5', title: 'Category 5', color: Colors.blueGrey),
-      CategoryModel(id: '6', title: 'Category 6', color: Colors.green),
+      CategoryModel(id: '1', title: 'Italian', color: Colors.purple),
+      CategoryModel(id: '2', title: 'Quick & Easy', color: Colors.red),
+      CategoryModel(id: '3', title: 'Hamburgers', color: Colors.yellow),
+      CategoryModel(id: '4', title: 'German'),
+      CategoryModel(id: '5', title: 'Light & Lovely', color: Colors.blueGrey),
+      CategoryModel(
+          id: '6', title: 'Exotic', color: Color.fromARGB(255, 99, 61, 236)),
+      CategoryModel(
+          id: '7',
+          title: 'Breakfast',
+          color: Color.fromARGB(255, 34, 151, 180)),
+      CategoryModel(id: '8', title: 'Asian', color: Colors.lightGreen),
     ];
   }
 }

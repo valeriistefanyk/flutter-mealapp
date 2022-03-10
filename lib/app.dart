@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:meal_app/screen/categories/categories.dart';
+import 'screen/categories/categories.dart';
+import 'screen/category_meals/category_meals.dart';
 import 'screen/welcome/welcome.dart';
 import 'routes.dart';
 
@@ -36,6 +37,10 @@ class MealApp extends StatelessWidget {
           break;
         case categoriesRoute:
           screen = CategoriesScreen();
+          break;
+        case categoryMealsRoute:
+          var args = settings.arguments as Map;
+          screen = CategoryMealsScreen(args['id'], args['title']);
           break;
         default:
           return null;
