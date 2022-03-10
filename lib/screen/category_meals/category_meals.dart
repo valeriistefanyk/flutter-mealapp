@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../models/meal.dart';
 
 class CategoryMealsScreen extends StatelessWidget {
   final String categoryId;
@@ -9,13 +10,15 @@ class CategoryMealsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final categoryMeals = MealModel.fetchById(categoryId);
+
     return Scaffold(
         appBar: AppBar(title: Text(categoryTitle)),
         body: ListView.builder(
           itemBuilder: (ctx, index) {
-            return Container();
+            return Text(categoryMeals[index].title);
           },
-          itemCount: 4,
+          itemCount: categoryMeals.length,
         ));
   }
 }
