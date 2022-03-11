@@ -52,6 +52,6 @@ class MainDrawer extends StatelessWidget {
   }
 
   void nextPage(BuildContext context, String routeName) {
-    Navigator.pushNamed(context, routeName);
+    Navigator.pushReplacementNamed(context, routeName);
   }
 }
