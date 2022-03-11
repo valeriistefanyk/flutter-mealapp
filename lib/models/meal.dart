@@ -43,6 +43,32 @@ class MealModel {
     required this.isVegetarian,
   });
 
+  String get complexityText {
+    switch (complexity) {
+      case Complexity.simple:
+        return 'simple';
+      case Complexity.challenging:
+        return 'challenging';
+      case Complexity.hard:
+        return 'hard';
+      default:
+        return 'unknown';
+    }
+  }
+
+  String get affordabilityText {
+    switch (affordability) {
+      case Affordability.affordable:
+        return 'affordable';
+      case Affordability.pricey:
+        return 'pricey';
+      case Affordability.luxurious:
+        return 'luxurious';
+      default:
+        return 'unknown';
+    }
+  }
+
   static List<MealModel> fetchAll() {
     return DUMMY_MEALS;
   }
