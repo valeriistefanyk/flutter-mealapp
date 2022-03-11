@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'screen/categories/categories.dart';
 import 'screen/category_meals/category_meals.dart';
 import 'screen/welcome/welcome.dart';
 import 'screen/meal_detail/meal_detail.dart';
+import 'screen/tabs/tabs.dart';
 import 'routes.dart';
 
 class MealApp extends StatelessWidget {
@@ -40,7 +40,7 @@ class MealApp extends StatelessWidget {
           screen = const WelcomeScreen();
           break;
         case categoriesRoute:
-          screen = CategoriesScreen();
+          screen = const TabScreen();
           break;
         case categoryMealsRoute:
           var args = settings.arguments as Map;
