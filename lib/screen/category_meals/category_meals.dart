@@ -11,13 +11,14 @@ class CategoryMealsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final categoryMeals = MealModel.fetchById(categoryId);
+    final categoryMeals = MealModel.fetchAllByCategoryId(categoryId);
 
     return Scaffold(
         appBar: AppBar(title: Text(categoryTitle)),
         body: ListView.builder(
           itemBuilder: (ctx, index) {
             return MealItem(
+                id: categoryMeals[index].id,
                 title: categoryMeals[index].title,
                 imageUrl: categoryMeals[index].imageUrl,
                 complexityText: categoryMeals[index].complexityText,

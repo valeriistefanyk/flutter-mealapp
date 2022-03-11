@@ -73,9 +73,13 @@ class MealModel {
     return DUMMY_MEALS;
   }
 
-  static List<MealModel> fetchById(String categoryId) {
+  static List<MealModel> fetchAllByCategoryId(String categoryId) {
     return fetchAll()
         .where((meal) => meal.categories.contains(categoryId))
         .toList();
+  }
+
+  static MealModel fetchById(String id) {
+    return fetchAll().firstWhere((meal) => meal.id == id);
   }
 }
