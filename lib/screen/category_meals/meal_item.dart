@@ -20,7 +20,7 @@ class MealItem extends StatelessWidget {
       : super(key: key);
 
   void selectMeal(BuildContext context) {
-    Navigator.pushNamed(context, mealDetail, arguments: {'id': id});
+    Navigator.pushNamed(context, mealDetailRoute, arguments: {'id': id});
   }
 
   @override

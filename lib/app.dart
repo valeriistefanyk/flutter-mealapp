@@ -3,6 +3,7 @@ import 'screen/category_meals/category_meals.dart';
 import 'screen/welcome/welcome.dart';
 import 'screen/meal_detail/meal_detail.dart';
 import 'screen/tabs/tabs.dart';
+import 'screen/filters/filters.dart';
 import 'routes.dart';
 
 class MealApp extends StatelessWidget {
@@ -46,9 +47,12 @@ class MealApp extends StatelessWidget {
           var args = settings.arguments as Map;
           screen = CategoryMealsScreen(args['id'], args['title']);
           break;
-        case mealDetail:
+        case mealDetailRoute:
           var args = settings.arguments as Map;
           screen = MealDetailScreen(args['id']);
+          break;
+        case filtersRoute:
+          screen = const FiltersScreen();
           break;
         default:
           return null;
