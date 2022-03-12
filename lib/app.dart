@@ -5,9 +5,45 @@ import 'screen/meal_detail/meal_detail.dart';
 import 'screen/tabs/tabs.dart';
 import 'screen/filters/filters.dart';
 import 'routes.dart';
+import 'models/meal.dart';
 
-class MealApp extends StatelessWidget {
+class MealApp extends StatefulWidget {
   const MealApp({Key? key}) : super(key: key);
+
+  @override
+  State<MealApp> createState() => _MealAppState();
+}
+
+class _MealAppState extends State<MealApp> {
+  Map<String, bool> _filters = {
+    'gluten': false,
+    'lactose': false,
+    'vegan': false,
+    'vegetarian': false,
+  };
+
+  var _availableMeals = MealModel.fetchAll();
+
+  void _setFilters(Map<String, bool> filterData) {
+    setState(() {
+      _filters = filterData;
+      _availableMeals = MealModel.fetchAll().where((meal) {
+        if (_filters['gluten'] == true && !meal.isGlutenFree) {
+          return false;
+        }
+        if (_filters['lactose'] == true && !meal.isLactoseFree) {
+          return false;
+        }
+        if (_filters['vegan'] == true && !meal.isVegan) {
+          return false;
+        }
+        if (_filters['vegetarian'] == true && !meal.isVegetarian) {
+          return false;
+        }
+        return true;
+      }).toList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,14 +81,15 @@ class MealApp extends StatelessWidget {
           break;
         case categoryMealsRoute:
           var args = settings.arguments as Map;
-          screen = CategoryMealsScreen(args['id'], args['title']);
+          screen =
+              CategoryMealsScreen(_availableMeals, args['id'], args['title']);
           break;
         case mealDetailRoute:
           var args = settings.arguments as Map;
           screen = MealDetailScreen(args['id']);
           break;
         case filtersRoute:
-          screen = const FiltersScreen();
+          screen = FiltersScreen(_filters, _setFilters);
           break;
         default:
           return null;

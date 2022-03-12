@@ -3,10 +3,13 @@ import '../../models/meal.dart';
 import 'meal_item.dart';
 
 class CategoryMealsScreen extends StatefulWidget {
+  final List<MealModel> availableMeals;
   final String categoryId;
   final String categoryTitle;
 
-  const CategoryMealsScreen(this.categoryId, this.categoryTitle, {Key? key})
+  const CategoryMealsScreen(
+      this.availableMeals, this.categoryId, this.categoryTitle,
+      {Key? key})
       : super(key: key);
 
   @override
@@ -24,7 +27,9 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
 
   @override
   void initState() {
-    displayedMeals = MealModel.fetchAllByCategoryId(widget.categoryId);
+    displayedMeals = widget.availableMeals.where((meal) {
+      return meal.categories.contains(widget.categoryId);
+    }).toList();
     super.initState();
   }
 
