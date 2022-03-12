@@ -35,37 +35,44 @@ class MealDetailScreen extends StatelessWidget {
     final meal = MealModel.fetchById(id);
 
     return Scaffold(
-        appBar: AppBar(title: Text(meal.title)),
-        body: SingleChildScrollView(
-            child: Column(children: [
-          SizedBox(
+      appBar: AppBar(title: Text(meal.title)),
+      body: SingleChildScrollView(
+          child: Column(children: [
+        SizedBox(
+          height: 300,
+          width: double.infinity,
+          child: Image.network(meal.imageUrl, fit: BoxFit.cover),
+        ),
+        buildSectionTitle(context, 'Ingredients'),
+        buildContainer(
+            child: ListView.builder(
+          itemCount: meal.ingredients.length,
+          itemBuilder: (ctx, index) => Card(
+              color: Theme.of(context).colorScheme.secondary,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                child: Text(meal.ingredients[index]),
+              )),
+        )),
+        buildSectionTitle(context, 'Steps'),
+        buildContainer(
             height: 300,
-            width: double.infinity,
-            child: Image.network(meal.imageUrl, fit: BoxFit.cover),
-          ),
-          buildSectionTitle(context, 'Ingredients'),
-          buildContainer(
-              child: ListView.builder(
-            itemCount: meal.ingredients.length,
-            itemBuilder: (ctx, index) => Card(
-                color: Theme.of(context).colorScheme.secondary,
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                  child: Text(meal.ingredients[index]),
-                )),
-          )),
-          buildSectionTitle(context, 'Steps'),
-          buildContainer(
-              height: 300,
-              child: ListView.builder(
-                  itemCount: meal.steps.length,
-                  itemBuilder: (ctx, index) => Column(children: [
-                        ListTile(
-                            leading: CircleAvatar(child: Text('#${index + 1}')),
-                            title: Text(meal.steps[index])),
-                        const Divider()
-                      ]))),
-        ])));
+            child: ListView.builder(
+                itemCount: meal.steps.length,
+                itemBuilder: (ctx, index) => Column(children: [
+                      ListTile(
+                          leading: CircleAvatar(child: Text('#${index + 1}')),
+                          title: Text(meal.steps[index])),
+                      const Divider()
+                    ]))),
+      ])),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.delete),
+        onPressed: () {
+          Navigator.of(context).pop(meal.id);
+        },
+      ),
+    );
   }
 }

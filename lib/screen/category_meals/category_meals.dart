@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../models/meal.dart';
 import 'meal_item.dart';
 
-class CategoryMealsScreen extends StatelessWidget {
+class CategoryMealsScreen extends StatefulWidget {
   final String categoryId;
   final String categoryTitle;
 
@@ -10,22 +10,40 @@ class CategoryMealsScreen extends StatelessWidget {
       : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final categoryMeals = MealModel.fetchAllByCategoryId(categoryId);
+  State<CategoryMealsScreen> createState() => _CategoryMealsScreenState();
+}
 
+class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
+  late List<MealModel> displayedMeals;
+
+  void _removeMeal(String mealId) {
+    setState(() {
+      displayedMeals.removeWhere((element) => element.id == mealId);
+    });
+  }
+
+  @override
+  void initState() {
+    displayedMeals = MealModel.fetchAllByCategoryId(widget.categoryId);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text(categoryTitle)),
+        appBar: AppBar(title: Text(widget.categoryTitle)),
         body: ListView.builder(
           itemBuilder: (ctx, index) {
             return MealItem(
-                id: categoryMeals[index].id,
-                title: categoryMeals[index].title,
-                imageUrl: categoryMeals[index].imageUrl,
-                complexityText: categoryMeals[index].complexityText,
-                duration: categoryMeals[index].duration,
-                affordabilityText: categoryMeals[index].affordabilityText);
+                id: displayedMeals[index].id,
+                title: displayedMeals[index].title,
+                imageUrl: displayedMeals[index].imageUrl,
+                complexityText: displayedMeals[index].complexityText,
+                duration: displayedMeals[index].duration,
+                affordabilityText: displayedMeals[index].affordabilityText,
+                removeItem: _removeMeal);
           },
-          itemCount: categoryMeals.length,
+          itemCount: displayedMeals.length,
         ));
   }
 }
