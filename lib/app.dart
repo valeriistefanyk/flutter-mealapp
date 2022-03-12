@@ -22,7 +22,8 @@ class _MealAppState extends State<MealApp> {
     'vegetarian': false,
   };
 
-  var _availableMeals = MealModel.fetchAll();
+  List<MealModel> _availableMeals = MealModel.fetchAll();
+  List<MealModel> _favoriteMeals = [];
 
   void _setFilters(Map<String, bool> filterData) {
     setState(() {
@@ -43,6 +44,24 @@ class _MealAppState extends State<MealApp> {
         return true;
       }).toList();
     });
+  }
+
+  void _toggleFavorite(String mealId) {
+    final existingIndex =
+        _favoriteMeals.indexWhere((meal) => meal.id == mealId);
+    if (existingIndex >= 0) {
+      setState(() {
+        _favoriteMeals.removeAt(existingIndex);
+      });
+    } else {
+      setState(() {
+        _favoriteMeals.add(MealModel.fetchById(mealId));
+      });
+    }
+  }
+
+  bool _isMealFavorite(String id) {
+    return _favoriteMeals.any((meal) => meal.id == id);
   }
 
   @override
@@ -77,7 +96,7 @@ class _MealAppState extends State<MealApp> {
           screen = const WelcomeScreen();
           break;
         case categoriesRoute:
-          screen = const TabScreen();
+          screen = TabScreen(_favoriteMeals);
           break;
         case categoryMealsRoute:
           var args = settings.arguments as Map;
@@ -86,7 +105,8 @@ class _MealAppState extends State<MealApp> {
           break;
         case mealDetailRoute:
           var args = settings.arguments as Map;
-          screen = MealDetailScreen(args['id']);
+          screen =
+              MealDetailScreen(args['id'], _toggleFavorite, _isMealFavorite);
           break;
         case filtersRoute:
           screen = FiltersScreen(_filters, _setFilters);

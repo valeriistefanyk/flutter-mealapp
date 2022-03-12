@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../models/meal.dart';
-import 'meal_item.dart';
+import '../../widgets/meal_item.dart';
 
 class CategoryMealsScreen extends StatefulWidget {
   final List<MealModel> availableMeals;
@@ -19,12 +19,6 @@ class CategoryMealsScreen extends StatefulWidget {
 class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
   late List<MealModel> displayedMeals;
 
-  void _removeMeal(String mealId) {
-    setState(() {
-      displayedMeals.removeWhere((element) => element.id == mealId);
-    });
-  }
-
   @override
   void initState() {
     displayedMeals = widget.availableMeals.where((meal) {
@@ -40,13 +34,13 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
         body: ListView.builder(
           itemBuilder: (ctx, index) {
             return MealItem(
-                id: displayedMeals[index].id,
-                title: displayedMeals[index].title,
-                imageUrl: displayedMeals[index].imageUrl,
-                complexityText: displayedMeals[index].complexityText,
-                duration: displayedMeals[index].duration,
-                affordabilityText: displayedMeals[index].affordabilityText,
-                removeItem: _removeMeal);
+              id: displayedMeals[index].id,
+              title: displayedMeals[index].title,
+              imageUrl: displayedMeals[index].imageUrl,
+              complexityText: displayedMeals[index].complexityText,
+              duration: displayedMeals[index].duration,
+              affordabilityText: displayedMeals[index].affordabilityText,
+            );
           },
           itemCount: displayedMeals.length,
         ));
