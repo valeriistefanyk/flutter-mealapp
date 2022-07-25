@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../models/meal.dart';
 import '../../widgets/meal_item.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CategoryMealsScreen extends StatefulWidget {
   final List<MealModel> availableMeals;
@@ -29,6 +30,7 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print('CategoryMealsScreen: ${context.locale.toString()}');
     return Scaffold(
         appBar: AppBar(title: Text(widget.categoryTitle)),
         body: ListView.builder(

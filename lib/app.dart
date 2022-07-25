@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'screen/category_meals/category_meals.dart';
 import 'screen/welcome/welcome.dart';
@@ -23,7 +24,7 @@ class _MealAppState extends State<MealApp> {
   };
 
   List<MealModel> _availableMeals = MealModel.fetchAll();
-  List<MealModel> _favoriteMeals = [];
+  final List<MealModel> _favoriteMeals = [];
 
   void _setFilters(Map<String, bool> filterData) {
     setState(() {
@@ -67,7 +68,10 @@ class _MealAppState extends State<MealApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Main Meal App',
+        title: 'Some Title',
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
         theme: ThemeData(
             fontFamily: 'OpenSans',
             textTheme: ThemeData.light().textTheme.copyWith(
