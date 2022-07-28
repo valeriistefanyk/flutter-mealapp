@@ -9,17 +9,26 @@ class CategoriesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView(
-        padding: const EdgeInsets.all(25),
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 200,
-          childAspectRatio: 3 / 2,
-          crossAxisSpacing: 20,
-          mainAxisSpacing: 20,
+    return Column(
+      children: [
+        TextField(
+          autofillHints: [AutofillHints.oneTimeCode],
+          keyboardType: TextInputType.number,
+          autofocus: true,
         ),
-        children: [
-          ..._getCategoryWidgets(),
-        ]);
+        //GridView(
+        //    padding: const EdgeInsets.all(25),
+        //    gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+        //      maxCrossAxisExtent: 200,
+        //      childAspectRatio: 3 / 2,
+        //      crossAxisSpacing: 20,
+        //      mainAxisSpacing: 20,
+        //    ),
+        //    children: [
+        //      ..._getCategoryWidgets(),
+        //    ]),
+      ],
+    );
   }
 
   List<Widget> _getCategoryWidgets() {
