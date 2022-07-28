@@ -13,7 +13,7 @@ class CategoriesScreen extends StatelessWidget {
       children: [
         TextField(
           autofillHints: [AutofillHints.oneTimeCode],
-          keyboardType: TextInputType.number,
+          keyboardType: TextInputType.text,
           autofocus: true,
         ),
         //GridView(
